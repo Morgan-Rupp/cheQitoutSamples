@@ -1,0 +1,59 @@
+<template name="ticketRedeem">
+  <style>
+    body {
+      background-color: white;
+    }
+  </style>
+  {{#if isMobile}}
+  <div class="redeemTicket">
+  <div class="img-thumbnail deal-img" style="background-image: url({{businessImage saleItem.merchant}})"><h4>{{saleItem.item.merchantName}}</h4><h5>{{cityLocation saleItem.item.city}}</h5></div>
+  <div class="small-teal-box"></div>
+  <div class="ticketArt "><div id="barcode"></div></div>
+  {{#if saleItem.redeemed}}
+    <div class="itemAlreadyRedeemed">Redeemed<i class="fa fa-check-circle"></i></div>
+  {{/if}}
+    <div class="redeemDiv {{changeVisibility saleItem.redeemed}}">
+
+      <div id="swipeIcon" class="redeemSwipe waves-effect"><div id="swipeWord">Swipe </div><span class="swipeArrow"></span></div>
+    </div>
+  <div id="checkInEvent">Check In Event</div>
+  <div class="socialMediaIcons">
+    <div class="circleBackground shareIcon" style="cursor: pointer;" onclick="window.location='http://facebook.com';"><span class="iconPicture fa fa-share-alt"></span></div>
+    <div class="circleBackground" style="cursor: pointer;" onclick="window.location='https://www.facebook.com/cheqitoutvanwa';"><span class="iconPicture fa fa-facebook"></span></div>
+    <div class="circleBackground" style="cursor: pointer;" onclick="window.location='https://twitter.com/cheQitoutVanWA';"><span class="iconPicture fa fa-twitter"></span></div>
+    <div class="circleBackground" style="cursor: pointer;" onclick="window.location='https://www.instagram.com/?hl=en';"><span class="iconPicture fa fa-instagram"></span></div>
+  </div>
+  <div class="ticketContent"><p>{{saleItem.item.name}}</p><p># Tickets: {{saleItem.quantity}}</p><p>{{{eventTime saleItem.item.eventStart}}}</p></div>
+  </div>
+  <div class="overlay {{visible}}">
+    <h2>Are you sure?</h2>
+    <p>This action cannot be undone!</p>
+
+    <button class="btn btn-confirm" id="{{saleItem._id}}">Yes</button>
+    <button class="btn btn-decline">No</button>
+  </div>
+  {{/if}}
+  {{#unless isMobile}}
+    <div class="overlay redeem-explanation opaque">
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <h1 class="center-align">How to Redeem</h1>
+          <div class="img-circle"></div>
+
+          <p style="font-size: 1.2em">The easiest way to redeem your purchased deals is to take your mobile device into the merchant, bring up the <strong>My Deals</strong> section, hit the "Redeem deal" button,
+            and have the merchant push the redeem buttons on your device.</p>
+
+          <h4>Where can I get the app?</h4>
+          <p><strong>cheQitout</strong> is available on the Apple App Strore and Google Play for Android.</p>
+
+          <h4>What if I don't have a mobile phone?</h4>
+          <p>You can still redeem your deals without a mobile device. Rather than bring in the device, you can print off the email we sent you when you bought the deal
+            that contains the key information and bring that into the merchant with a photo ID instead.</p>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+  {{/unless}}
+  {{> footer}}
+</template>

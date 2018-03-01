@@ -1,0 +1,62 @@
+<template name="ticketDashboard">
+  <div class="ticketDashboard">
+    <style>
+      header {
+        display: none;
+      }
+    </style>
+    <div class="blackSection col-md-6">
+        <div class="cheqitoutImage"></div>
+        <div class="ticketDashboardText">cheQitout | <span class="orange">Ticket Dashboard</span></div>
+        <div class="clientInformation">
+          <div class="eventLogo" style="background-image: url({{eventLogo}})"></div>
+          <br>
+          <br>
+          Client: {{client}}<br>
+          Event: {{event}}<br>
+          Date: {{date}}<br>
+          <br>
+          <br>
+
+
+        </div>
+    </div>
+    <div class="whiteSection col-md-6">
+      <div class="col-md-1"></div>
+      <div class="col-md-10 marginAdjust">
+        {{{ticketTotal}}}
+        <div class="ticketArt secondTicket"><p class="ticketNumber">{{ticketRemaining}}</p><div class="dashedLine"></div><p class="textTicket pending">PENDING</p></div>
+        <div class="updateEvent" style="visibility: hidden"><p>UPDATE YOUR EVENT</p>
+          <div class="socialMediaIcons">
+            <div class="circleBackground shareIcon" style="cursor: pointer; visibility: hidden" onclick="window.location='http://facebook.com';"><span class="iconPicture fa fa-share-alt"></span></div>
+            <div class="circleBackground" style="cursor: pointer; visibility: hidden" onclick="window.location='https://www.facebook.com/cheqitoutvanwa';"><span class="iconPicture fa fa-facebook"></span></div>
+            <div class="circleBackground" style="cursor: pointer; visibility: hidden" onclick="window.location='https://twitter.com/cheQitoutVanWA';"><span class="iconPicture fa fa-twitter"></span></div>
+            <div class="circleBackground" style="cursor: pointer; visibility: hidden" onclick="window.location='https://www.instagram.com/?hl=en';"><span class="iconPicture fa fa-instagram"></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+
+
+    <!--<h2>Tickets Total: {{ticketTotal}}</h2>
+    <br>
+    <h2>Tickets Remaining: {{ticketRemaining}}</h2>
+    <br>
+    <h2>Tickets Purchased: {{ticketPurchased}}</h2>
+    <br>
+    <h2>Ticket List: </h2>
+    <br>
+    {{#each ticketList}}
+      <h4>{{buyerName}} {{key}} {{quantity}}</h4>
+      <br>
+    {{/each}}-->
+    <div class="ticketFooter">
+      <button type="button" class="ticket-button" onclick="Router.go('/add-ticket-inventory/{{_id}}')">Add to Ticket Inventory</button>
+      <span class="breaker">|</span>
+      <button type="button" class="ticket-button" onclick="Router.go('/share-ticket-dashboard/{{_id}}')">Share Ticket Dashboard</button>
+      <span class="breaker">|</span>
+      <button type="button" class="ticket-button" id="signOut">Sign Out</button>
+    </div>
+  </div>
+</template>

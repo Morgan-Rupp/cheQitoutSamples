@@ -1,0 +1,77 @@
+<template name="ticketStore">
+		<div id="header-space" class="{{adActive}}">
+			{{> ad}}
+		</div>
+		<div class="container small-margin-top margin-bottom">
+		<div id="tab-button-group" class="{{setActive}}">
+			<style>
+				.back-bar #back-button {
+					display: none;
+				}
+			</style>
+			<ul>
+				<li title="Store" class="tab-button waves-effect waves-light" id="store"><div id="store-image" class="menu-image"></div></li>
+				<li title="Notifications" class="tab-button waves-effect waves-light" id="notification"><div id="note-image" class="menu-image"><div id="unseen" class="{{unseenCounterVisible}}">{{unseen}}</div></div></li>
+					<div id="notifications-wrapper">
+						{{> notifications}}
+					</div>
+				<li title="Categories" class="tab-button waves-effect waves-light" id="categories"><div id="cat-image" class="menu-image"></div></li>
+				<li title="Map/Store" class="tab-button waves-effect waves-light" id="map-store" onclick="setTimeout(function(){window.dispatchEvent(new Event('resize'));}, 100);"><div id="map-image" class="menu-image map-icon"></div></li>
+				<li title="Settings" class="tab-button waves-effect waves-light" id="settings"><div id="set-image" class="menu-image"></div></li>
+			</ul>
+			<div id="settings-panel" class="{{setDisplay}}">
+				<button class="btn btn-settings waves-effect" id="logout"><i class="fa fa-sign-out"></i> Log Out</button>
+				<button class="btn btn-settings waves-effect" id="myDeals"><i class="fa fa-list"></i> My Deals</button>
+				<button class="btn btn-settings waves-effect" id="myMemberships"><i class="fa fa-list"></i> My Memberships</button>
+				<button class="btn btn-settings waves-effect" id="profile-setup"><i class="fa fa-user-plus"></i> Change Personal Information</button>
+				<button class="btn btn-settings waves-effect" id="interests"><i class="fa fa-heart-o"></i> Change Interests</button>
+				<button class="btn btn-settings waves-effect" id="braintree"><i class="fa fa-credit-card-alt"></i> Change Payment Method</button>
+				<button class="btn btn-settings waves-effect" id="merchant"><i class="fa fa-sliders"></i> Go to Merchant Dashboard</button>
+				<button class="btn btn-settings waves-effect" id="giftCards"><i class="fa fa-gift"></i> Gift Cards &amp; Codes</button>
+				<button class="btn btn-settings waves-effect" id="support"><i class="fa fa-question-circle"></i> Support</button>
+				{{#if cordova}}
+				<label class="btn pushOpt btn-settings waves-effect">Allow push notifications
+					<input type="checkbox" name="pushNotes" id="pushNotes" {{notificationOptIn}}>
+				</label>
+				{{/if}}
+			</div>
+		</div>
+			<div class="row deals-panel {{storeActive}}">
+				<div id="deals">
+
+					{{#each deals}}
+					<!--Loops through all deals-->
+						<script type="application/ld+json">
+							{{{schema}}}
+						</script>
+						<div class="deal {{expired}} waves-light">
+						<!-- <div class="deal col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-12 {{expired}} waves-effect waves-light"> -->
+
+						<div class="deal-background">
+							<div class="percent-off" style="display: {{percentOff}};">{{#if ticketDeal}}<span style="font-size: 18px">You Save</span><span> $</span>{{/if}}{{{percent}}}</div>
+							<!--<div class="seller">Seller: {{createdBy}}</div>-->
+							<a id="{{_id}}" href="store/{{actualDealUrl}}" class="img-thumbnail deal-img" style="background-image: {{smallImgUrl}}; filter: {{effects}}; -webkit-filter: {{effects}};" {{storeImage _id}}></a>
+							<div class="deal-data" onclick="Router.go('/store/{{actualDealUrl}}');">
+								<div class="price">${{{priceDecimal price}}}{{#if ticketDeal}} <i style="font-size: 35px; position: relative; top: -4px;" class="fa fa-ticket" aria-hidden="true"></i>{{/if}}</div>
+								<div class="pricePerPerson" style="display: {{isPricePerPerson}};">{{pricePerPerson}}<br></div>
+								<div class="merchant">{{merchantName}}</div>
+								<div class="name">{{name}}</div>
+								{{#if subscription}}<div class="subscription-indicator">{{subscriptionDetails}}</div>{{/if}}
+							</div>
+						</div>
+						</div>
+					{{/each}}
+
+					<!--<div class="down-arrow center-align">&#9660;</div>-->
+
+				</div><!--end of #deals-->
+			</div><!--end of row deals-panel-->
+			<div class="row categories-panel {{catActive}}">
+				{{> categories}}
+			</div>
+			<div class="row map-panel {{mapActive}}">
+				{{> map}}
+			</div>
+		</div>
+	{{> footer}}
+</template>
